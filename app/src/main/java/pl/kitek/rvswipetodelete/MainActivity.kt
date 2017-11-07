@@ -6,9 +6,12 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
+
+    private val simpleAdapter = SimpleAdapter((1..5).map { "Item: $it" }.toMutableList())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
         recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = SimpleAdapter((1..20).map { "Item: $it" }.toMutableList())
+        recyclerView.adapter = simpleAdapter
 
         val swipeHandler = object : SwipeToDeleteCallback(this) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -27,5 +30,12 @@ class MainActivity : AppCompatActivity() {
         val itemTouchHelper = ItemTouchHelper(swipeHandler)
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
+        addItemBtn.setOnClickListener(this)
+    }
+
+    override fun onClick(v: View?) {
+        when (v?.id) {
+            R.id.addItemBtn -> simpleAdapter.addItem("New item")
+        }
     }
 }

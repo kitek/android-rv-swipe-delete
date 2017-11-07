@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.row_item.view.*
 
-class SimpleAdapter(val items: MutableList<String>) : RecyclerView.Adapter<SimpleAdapter.VH>() {
+class SimpleAdapter(private val items: MutableList<String>) : RecyclerView.Adapter<SimpleAdapter.VH>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         return VH(parent)
@@ -16,6 +16,11 @@ class SimpleAdapter(val items: MutableList<String>) : RecyclerView.Adapter<Simpl
     }
 
     override fun getItemCount(): Int = items.size
+
+    fun addItem(name: String) {
+        items.add(name)
+        notifyItemInserted(items.size)
+    }
 
     fun removeAt(position: Int) {
         items.removeAt(position)

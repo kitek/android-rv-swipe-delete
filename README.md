@@ -2,4 +2,4 @@
 
 Simple RecyclerView swipe to delete implementation.
 
-![alt text](https://github.com/kitek/android-rv-swipe-delete/blob/master/doc/demo.gif)
+![alt text](https://raw.githubusercontent.com/kitek/android-rv-swipe-delete/master/doc/demo.gif?v=2)
